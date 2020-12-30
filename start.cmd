@@ -1,6 +1,9 @@
-java -Xmx1024M --Xms512M -jar minecraft_server.1.16.4.jar --nogui
 
+curl.exe -C - -o minecraft_server.jar https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar
+java -Xmx1024M -Xms512M 	-jar minecraft_server.jar --nogui
+rem java -Xmx1G 			-jar minecraft_server.jar --port 1337 --nogui --world cold
 
+goto:eof
 --bonusChest		If a bonus chest should be generated, when the world is first generated.
 --demo			If the server is in demo mode. (Shows the players a demo pop-up, no further implications?)
 --eraseCache		Erases the lighting caches, etc. Same option as when optimizing single player worlds.
