@@ -1,3 +1,10 @@
 *.jar
 **/*.lock
-logs/*.log
+**/logs/*.*
+**/world
+**/*.log
+**/libraries
+start-*.*
+**/.mixin.out
+**/eula.txt
+
