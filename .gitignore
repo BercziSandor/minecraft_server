@@ -7,5 +7,4 @@
 start-*.*
 **/.mixin.out
 **/eula.txt
-
-
+.*
