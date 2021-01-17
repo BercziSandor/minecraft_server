@@ -1,19 +1,34 @@
 #!/bin/bash
+set -e
+
+
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd $SCRIPTDIR
 
 op_system=win
+# Forge: http://files.minecraftforge.net/
+# Paper: https://papermc.io/
+
 
 # Parameters
 mode=$1
-mode=${mode:-forge}
+mode=${mode:-paper}
 echo "Mode:    [$mode]"
 
 version=$2
 if [ "$mode" == "forge" ]; then
-	version=${version:-1.16.4-35.1.4}
-	version=${version:-1.16.5-36.0.0}
+	version=1.16.4
+	rel=35.1.4
+	# version=${version:-1.16.4-35.1.4}
+	# version=${version:-1.16.5-36.0.0}
+	installerLink=https://files.minecraftforge.net/maven/net/minecraftforge/forge/${version}-${rev}/forge-${version}-${rev}-installer.jar
+	version=${version}-${rev}
+elif [ "$mode" == "paper" ]; then
+	version=1.16.5
+	rev=428
+	installerLink=https://papermc.io/api/v2/projects/paper/versions/${version}/builds/${rev}/downloads/paper-${version}-${rev}.jar
+	version=${version}-${rev}
 else
 	echo "TODO 23645, aborting"
 	exit 1
@@ -32,21 +47,21 @@ if [ -e "$outDir" ]; then
 fi
 mkdir -p "$outDir"
 
-# http://files.minecraftforge.net/
 if [ "$mode" == "forge" ]; then
 	cd "$outDir" >/dev/null
-	curl --output 	forge-installer.jar   https://files.minecraftforge.net/maven/net/minecraftforge/forge/${version}/forge-${version}-installer.jar
-	java -jar 		forge-installer.jar --installServer
-	rm forge-installer.jar
-	jarToRun=forge-${version}.jar
-	javaParams="-Xms1G -Xmx1G -jar $jarToRun nogui pause"
-elif [ "$mode" == "vanilla" ]; then
+	curl --output 	installer.jar   $installerLink
+	java -jar 		installer.jar --installServer
+	rm installer.jar
+	javaParams="-Xms1G -Xmx1G -jar forge-${version}.jar nogui pause"
+
+elif [ "$mode" == "paper" ]; then
 	cd "$outDir" >/dev/null
-	curl --output 	forge-installer.jar   https://files.minecraftforge.net/maven/net/minecraftforge/forge/${version}/forge-${version}-installer.jar
-	java -jar 		forge-installer.jar --installServer
-	rm forge-installer.jar
-	jarToRun=forge-${version}.jar
-	javaParams="-Xms1G -Xmx1G -jar $jarToRun nogui pause"
+	curl --output 	paper-${version}.jar   $installerLink
+	javaParams="-Xms1G -Xmx1G -jar paper-${version}.jar nogui pause"
+
+elif [ "$mode" == "vanilla" ]; then
+	echo "TODO 23s545, aborting"
+	exit 1
 fi
 
 cd $SCRIPTDIR
