@@ -15,9 +15,8 @@ mode=$1
 mode=${mode:-forge}
 echo "Mode:    [$mode]"
 
-version=$2
+version=1.16.5
 if [ "$mode" == "forge" ]; then
-    version=1.16.5
     rev=36.0.0
     # version=${version:-1.16.4-35.1.4}
     # version=${version:-1.16.5-36.0.0}
@@ -26,20 +25,17 @@ if [ "$mode" == "forge" ]; then
     version=${version}-${rev}
 
 elif [ "$mode" == "paper" ]; then
-    version=1.16.5
     rev=428
     echo "Paper site: https://papermc.io/"
     installerLink=https://papermc.io/api/v2/projects/paper/versions/${version}/builds/${rev}/downloads/paper-${version}-${rev}.jar
     version=${version}-${rev}
 
 elif [ "$mode" == "spigot" ]; then
-    version=1.16.5
     echo "Spigot site: https://www.spigotmc.org"
     installerLink=https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
 
 elif [ "$mode" == "vanilla" ]; then
     # See: https://www.minecraft.net/en-us/download/server/
-    version=1.16.5
     installerLink=https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar
 else
     echo "Invalid mode: $mode, aborting"
