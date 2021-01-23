@@ -15,9 +15,20 @@ mode=$1
 mode=${mode:-forge}
 echo "Mode:    [$mode]"
 
-version=1.16.5
+version=$2
+version=${version:-1.16.5}
+
 if [ "$mode" == "forge" ]; then
-    rev=36.0.0
+    if [ "$version" == "1.16.5" ]; then
+        rev=36.0.0
+    elif [ "$version" == "1.10" ]; then
+        # https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.10.2-12.18.3.2185/forge-1.10.2-12.18.3.2185-installer.jar
+        version=1.10.2
+        rev=12.18.3.2185
+    else
+        echo "This version is not supported."
+        exit 1
+    fi
     # version=${version:-1.16.4-35.1.4}
     # version=${version:-1.16.5-36.0.0}
     echo "Forge site: http://files.minecraftforge.net/"
@@ -61,6 +72,7 @@ mkdir -p "$outDir"
 cd "$outDir" >/dev/null
 if [ "$mode" == "forge" ]; then
     curl --output   installer.jar           $installerLink
+    [ -e mods ] || mkdir mods
     java -jar       installer.jar --installServer
     rm installer.jar
 elif [ "$mode" == "paper" ]; then
@@ -74,7 +86,7 @@ elif [ "$mode" == "spigot" ]; then
 else
     exit 1
 fi
-javaParams="$java_memory_options -jar ${mode}-${version}.jar nogui pause"
+javaParams="$java_memory_options -jar $(ls ${mode}*.jar) nogui pause"
 
 cd $SCRIPTDIR
 echo "Creating start script..."
