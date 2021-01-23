@@ -96,11 +96,7 @@ if [ $op_system == 'win' ]; then
     startScript=start-${outDir}.cmd
     (
         echo "@echo off"
-        echo "echo *****************************"
-        echo "echo The ip of the server:"
-        echo "curl -s ipinfo.io/ip"
-        echo "echo "
-        echo "echo *****************************"
+        echo "START \"\" /WAIT CMD /C \"echo IP of the server: & curl -s ipinfo.io/ip & echo. & pause\""
         echo "pushd %~dp0\\${outDir}"
         echo " java $javaParams"
         echo "popd"

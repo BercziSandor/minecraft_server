@@ -1,6 +1,8 @@
 !install.sh
 !extras
+!*/*.json
 */*.jar
+*/eula.txt
 **/cache/*.jar
 **/mods/*.jar
 **/*.lock
@@ -9,9 +11,7 @@
 **/*.log
 **/*.log.txt
 **/libraries
-*.cmd
 **/.mixin.out
-**/eula.txt
 .*
 *-spigot/BuildData
 *-spigot/Bukkit
