@@ -17,6 +17,7 @@ echo "Mode:    [$mode]"
 
 version=$2
 version=${version:-1.16.5}
+version_orig=$version
 
 if [ "$mode" == "forge" ]; then
     if [ "$version" == "1.16.5" ]; then
@@ -73,6 +74,7 @@ cd "$outDir" >/dev/null
 if [ "$mode" == "forge" ]; then
     curl --output   installer.jar           $installerLink
     [ -e mods ] || mkdir mods
+    [ -e ../extras/mods/$version_orig ] && cp -v ../extras/mods/$version_orig/*.* mods/
     java -jar       installer.jar --installServer
     rm installer.jar
 elif [ "$mode" == "paper" ]; then
@@ -94,6 +96,11 @@ if [ $op_system == 'win' ]; then
     startScript=start-${outDir}.cmd
     (
         echo "@echo off"
+        echo "echo *****************************"
+        echo "echo The ip of the server:"
+        echo "curl -s ipinfo.io/ip"
+        echo "echo "
+        echo "echo *****************************"
         echo "pushd %~dp0\\${outDir}"
         echo " java $javaParams"
         echo "popd"
@@ -115,4 +122,9 @@ fi
 
 echo eula=true> $outDir/eula.txt
 echo
+
+
+
 echo "The server is ready to start. Script: $SCRIPTDIR/$startScript"
+# ip=$(curl -s ipinfo.io/ip)
+#echo -e "The ip of the server: [$ip]"

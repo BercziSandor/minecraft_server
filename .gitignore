@@ -1,4 +1,6 @@
-*.jar
+*/*.jar
+**/cache/*.jar
+**/mods/*.jar
 **/*.lock
 **/logs/*.*
 **/world*
@@ -6,6 +8,7 @@
 **/*.log.txt
 **/libraries
 start-*.*
+!extras
 **/.mixin.out
 **/eula.txt
 .*
