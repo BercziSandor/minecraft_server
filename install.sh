@@ -21,7 +21,8 @@ version_orig=$version
 
 if [ "$mode" == "forge" ]; then
     if [ "$version" == "1.16.5" ]; then
-        rev=36.0.0
+        # https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.16.5-36.0.45/forge-1.16.5-36.0.45-installer.jar
+        rev=36.0.45
     elif [ "$version" == "1.10" ]; then
         # https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.10.2-12.18.3.2185/forge-1.10.2-12.18.3.2185-installer.jar
         version=1.10.2
@@ -37,8 +38,9 @@ if [ "$mode" == "forge" ]; then
     version=${version}-${rev}
 
 elif [ "$mode" == "paper" ]; then
-    rev=428
+    rev=523
     echo "Paper site: https://papermc.io/"
+    # https://papermc.io/api/v2/projects/paper/versions/1.16.5/builds/523/downloads/paper-1.16.5-523.jar
     installerLink=https://papermc.io/api/v2/projects/paper/versions/${version}/builds/${rev}/downloads/paper-${version}-${rev}.jar
     version=${version}-${rev}
 
