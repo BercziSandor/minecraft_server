@@ -22,7 +22,7 @@ version_orig=$version
 if [ "$mode" == "forge" ]; then
     if [ "$version" == "1.16.5" ]; then
         # https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.16.5-36.0.45/forge-1.16.5-36.0.45-installer.jar
-        rev=36.0.45
+        rev=36.1.4
     elif [ "$version" == "1.10" ]; then
         # https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.10.2-12.18.3.2185/forge-1.10.2-12.18.3.2185-installer.jar
         version=1.10.2
@@ -60,8 +60,7 @@ echo "Version: [$version]"
 echo
 
 outDir=${version}-${mode}
-
-rm -rf "$outDir" # fixme
+[ -d "$outDir" ] && rm -rf "$outDir"
 
 echo "Prepare output directory $outDir"
 if [ -e "$outDir" ]; then
