@@ -65,11 +65,11 @@ echo "Version: [$version]"
 echo
 
 outDir=${version}-${mode}
-[ -d "$outDir" ] && rm -rf "$outDir"
+# [ -d "$outDir" ] && rm -rf "$outDir"
 
 echo "Prepare output directory $outDir"
 if [ -e "$outDir" ]; then
-    echo "$SCRIPTDIR/$outDir already exist. Delete it manually & start this script again."
+    echo "$SCRIPTDIR/$outDir already exist. Delete it manually, if you want & start this script again."
     exit 1
 fi
 mkdir -p "$outDir"
