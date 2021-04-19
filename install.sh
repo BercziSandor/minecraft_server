@@ -27,6 +27,11 @@ if [ "$mode" == "forge" ]; then
         # https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.10.2-12.18.3.2185/forge-1.10.2-12.18.3.2185-installer.jar
         version=1.10.2
         rev=12.18.3.2185
+    elif [ "$version" == "1.7.10" ]; then
+        # https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/forge-1.7.10-10.13.4.1614-1.7.10-installer.jar
+        # https://files.minecraftforge.net/maven/net/minecraftforge/forge/${version}-${rev}-${version}/forge-${version}-${rev}-${version}-installer.jar
+        rev="10.13.4.1614"
+        installerLink="https://files.minecraftforge.net/maven/net/minecraftforge/forge/${version}-${rev}-${version}/forge-${version}-${rev}-${version}-installer.jar"
     else
         echo "This version is not supported."
         exit 1
@@ -34,7 +39,7 @@ if [ "$mode" == "forge" ]; then
     # version=${version:-1.16.4-35.1.4}
     # version=${version:-1.16.5-36.0.0}
     echo "Forge site: http://files.minecraftforge.net/"
-    installerLink=https://files.minecraftforge.net/maven/net/minecraftforge/forge/${version}-${rev}/forge-${version}-${rev}-installer.jar
+    [ -z "$installerLink"] && installerLink=https://files.minecraftforge.net/maven/net/minecraftforge/forge/${version}-${rev}/forge-${version}-${rev}-installer.jar
     version=${version}-${rev}
 
 elif [ "$mode" == "paper" ]; then
