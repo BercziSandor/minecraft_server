@@ -21,8 +21,8 @@ version_orig=$version
 
 if [ "$mode" == "forge" ]; then
     if [ "$version" == "1.16.5" ]; then
-        # https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.16.5-36.0.45/forge-1.16.5-36.0.45-installer.jar
-        rev=36.1.4
+        # https://maven.minecraftforge.net/net/minecraftforge/forge/1.16.5-36.1.0/forge-1.16.5-36.1.0-installer.jar
+        rev=36.1.0
     elif [ "$version" == "1.10" ]; then
         # https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.10.2-12.18.3.2185/forge-1.10.2-12.18.3.2185-installer.jar
         version=1.10.2
@@ -39,7 +39,7 @@ if [ "$mode" == "forge" ]; then
     # version=${version:-1.16.4-35.1.4}
     # version=${version:-1.16.5-36.0.0}
     echo "Forge site: http://files.minecraftforge.net/"
-    [ -z "$installerLink"] && installerLink=https://files.minecraftforge.net/maven/net/minecraftforge/forge/${version}-${rev}/forge-${version}-${rev}-installer.jar
+    [ -z "$installerLink"] && installerLink=https://maven.minecraftforge.net/net/minecraftforge/forge/${version}-${rev}/forge-${version}-${rev}-installer.jar
     version=${version}-${rev}
 
 elif [ "$mode" == "paper" ]; then
@@ -64,7 +64,7 @@ fi
 echo "Version: [$version]"
 echo
 
-outDir=${version}-${mode}
+outDir=server_${version}-${mode}
 # [ -d "$outDir" ] && rm -rf "$outDir"
 
 echo "Prepare output directory $outDir"
